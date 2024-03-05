@@ -1,0 +1,10 @@
+{
+    "recommendations": [
+        "pkief.material-icon-theme",
+        "abumalick.vscode-nvm",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "oderwat.indent-rainbow"
+    ]
+}
