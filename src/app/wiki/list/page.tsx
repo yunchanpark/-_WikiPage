@@ -1,19 +1,29 @@
-import prisma from '@/db';
+'use client';
+
+import useSuspenseFetchWikiAndTotalCount from '@/service/wiki/queries/useSuspenseFetchWikiAndTotalCount';
 import Link from 'next/link';
 
-export default async function WikiListPage() {
-    const wikiList = await prisma.wiki.findMany();
+export default function WikiListPage() {
+    const [wikiList, totalCount] = useSuspenseFetchWikiAndTotalCount({
+        wiki: {
+            request: {
+                page: 0,
+                countPerPage: 5,
+            },
+        },
+    });
 
     return (
         <main>
             <Link href={'/wiki/create'}>생성</Link>
             <p>위키 조회 페이지</p>
-            {wikiList.map(({ title, contents, id }) => {
+            <p>종 {totalCount.data.wikiTotalCount}</p>
+            {wikiList.data.items.map(({ title, contents, id }) => {
                 return (
-                    <div key={id}>
+                    <Link href={`/wiki/${id}`} key={id}>
                         <p>{title}</p>
                         <p>{contents}</p>
-                    </div>
+                    </Link>
                 );
             })}
         </main>

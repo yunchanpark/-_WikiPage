@@ -1,7 +1,7 @@
 import prisma from '@/db';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
     const body = await req.json();
 
     if (!body?.title || !body?.contents) {
@@ -15,9 +15,8 @@ export async function POST(req: Request) {
                 contents: body.contents,
             },
         });
+        return NextResponse.json({ msg: 'Created Wiki' }, { status: 201 });
     } catch (error) {
         return NextResponse.json({ msg: 'Failed Create Wiki' }, { status: 500 });
     }
-
-    return NextResponse.json({ msg: 'Created Wiki' }, { status: 201 });
 }
