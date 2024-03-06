@@ -24,17 +24,17 @@ export default function Pagination({
 }: PaginationProps) {
     const totalPages = Math.ceil(totalItems / itemCountPerPage);
     const startPage = Math.max(1, currentPage - (currentPage % visiblePageRange));
-    const endPage = Math.min(startPage + visiblePageRange, totalPages);
+    const endPage = Math.min(startPage + visiblePageRange - 1, totalPages);
 
     return (
         <ul className="flex justify-center space-x-2">
-            {renderPrev({ page: startPage - 1, disable: currentPage === 1 })}
+            {renderPrev({ page: currentPage - 1, disable: currentPage === 1 })}
             {range(startPage, endPage).map((page) => {
                 const active = currentPage === page;
                 return <li key={page}>{renderItem({ page, active })}</li>;
             })}
             {renderNext({
-                page: endPage + 1,
+                page: currentPage + 1,
                 disable: currentPage >= totalPages,
             })}
         </ul>
