@@ -14,22 +14,27 @@ export default async function WikiListPage({ searchParams }: WikiListPageProps) 
     const [wikiList, totalCount] = await Promise.all([fetchWikiList({ page, countPerPage: 5 }), fetchWikiTotalCount()]);
 
     return (
-        <main>
+        <main className="max-w-4xl mx-auto py-10 px-5">
             <ServerListComponent
                 data={wikiList.items}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <Link href={`/wiki/${item.id}`} key={item.id}>
-                        <p>{item.title}</p>
+                    <Link href={`/wiki/${item.id}`} key={item.id} className="block hover:bg-gray-100 p-3 rounded-lg ">
+                        <p className="text-lg font-semibold line-clamp-1 text-ellipsis break-words">{item.title}</p>
                     </Link>
                 )}
                 ListHeaderComponent={() => (
-                    <div>
-                        <Link href={'/wiki/create'}>생성</Link>
-                        <p>위키 조회 페이지</p>
+                    <div className="flex justify-between items-center mb-5">
+                        <p className="text-xl font-bold">위키 조회 페이지</p>
+                        <Link
+                            href={'/wiki/create'}
+                            className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors duration-200"
+                        >
+                            위키 생성
+                        </Link>
                     </div>
                 )}
-                ListEmptyComponent={() => <p>작성된 위키 게시글이 없습니다.</p>}
+                ListEmptyComponent={() => <p className="text-center py-5">작성된 위키 게시글이 없습니다.</p>}
                 ListFooterComponent={() => (
                     <WikiListPagination
                         currentPage={page}
