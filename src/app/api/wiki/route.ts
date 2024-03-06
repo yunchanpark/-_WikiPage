@@ -1,4 +1,5 @@
 import prisma from '@/db';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -15,6 +16,8 @@ export async function POST(req: NextRequest) {
                 contents: body.contents,
             },
         });
+
+        revalidatePath('/wiki/list', 'page');
         return NextResponse.json({ msg: 'Created Wiki' }, { status: 201 });
     } catch (error) {
         return NextResponse.json({ msg: 'Failed Create Wiki' }, { status: 500 });

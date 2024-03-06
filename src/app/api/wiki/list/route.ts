@@ -11,10 +11,20 @@ export async function GET(req: NextRequest) {
         return NextResponse.json({ msg: 'Pagination parameters are invalid or missing.' }, { status: 400 });
     }
 
+    if (paginationParams.pageNumber <= 0) {
+        return NextResponse.json({ items: [] }, { status: 200 });
+    }
+
+    const pageNumber = paginationParams.pageNumber - 1;
+    const pageSize = paginationParams.pageSize;
+
     try {
         const wikiList = await prisma.wiki.findMany({
-            skip: Number(page) * Number(countPerPage),
-            take: Number(countPerPage),
+            skip: pageNumber * pageSize,
+            take: pageSize,
+            orderBy: {
+                createdAt: 'desc',
+            },
         });
         return NextResponse.json({ items: wikiList }, { status: 200 });
     } catch (error) {

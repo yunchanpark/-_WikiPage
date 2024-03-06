@@ -11,7 +11,7 @@ export async function PUT(req: NextRequest) {
             return NextResponse.json({ msg: 'title or contents is Empty' }, { status: 404 });
         }
 
-        const wiki = await prisma.wiki.update({ data: { contents: body.contents }, where: { id } });
+        await prisma.wiki.update({ data: { contents: body.contents }, where: { id } });
 
         return NextResponse.json({ msa: 'Updated Wiki' }, { status: 200 });
     } catch (error) {
