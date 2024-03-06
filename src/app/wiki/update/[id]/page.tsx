@@ -1,7 +1,7 @@
 'use client';
 
+import useForm from '@/hooks/useForm';
 import useFetchDetailWiki from '@/service/wiki/queries/useFetchDetailWiki';
-import { FormEvent, useState } from 'react';
 import useUpdateWiki from './hooks/useUpdateWiki';
 
 type WikiUpdatePageProps = {
@@ -12,20 +12,23 @@ type WikiUpdatePageProps = {
 
 export default function WikiUpdatePage({ params: { id } }: WikiUpdatePageProps) {
     const { data } = useFetchDetailWiki({ id });
-    const [contents, setContents] = useState(data?.wiki.contents ?? '');
-
     const { mutate } = useUpdateWiki({ id });
-
-    const updateWiki = async (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        mutate({ contents, id });
-    };
+    const { values, handleChange, handleSubmit } = useForm(
+        {
+            contents: data?.wiki.contents ?? '',
+        },
+        {
+            onSubmit(_, { contents }) {
+                mutate({ contents, id });
+            },
+        },
+    );
 
     return (
         <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-md p-8 space-y-4 bg-white rounded-lg shadow">
                 <p className="text-xl font-bold text-center">위키 업데이트 페이지</p>
-                <form onSubmit={updateWiki} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label htmlFor="title" className="block text-sm font-medium text-gray-700">
                             제목
@@ -48,8 +51,8 @@ export default function WikiUpdatePage({ params: { id } }: WikiUpdatePageProps) 
                         <textarea
                             name="contents"
                             id="contents"
-                            value={contents}
-                            onChange={(e) => setContents(e.target.value)}
+                            value={values.contents}
+                            onChange={handleChange}
                             placeholder="본문"
                             required
                             rows={4}
