@@ -27,11 +27,15 @@ export default function Pagination({
     const endPage = Math.min(startPage + visiblePageRange - 1, totalPages);
 
     return (
-        <ul className="flex justify-center space-x-2">
+        <ul className="flex justify-center gap-2">
             {renderPrev({ page: currentPage - 1, disable: currentPage === 1 })}
             {range(startPage, endPage).map((page) => {
                 const active = currentPage === page;
-                return <li key={page}>{renderItem({ page, active })}</li>;
+                return (
+                    <li key={page} className="flex">
+                        {renderItem({ page, active })}
+                    </li>
+                );
             })}
             {renderNext({
                 page: currentPage + 1,

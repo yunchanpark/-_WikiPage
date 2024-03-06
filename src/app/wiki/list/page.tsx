@@ -14,12 +14,13 @@ export default async function WikiListPage({ searchParams }: WikiListPageProps) 
     const [wikiList, totalCount] = await Promise.all([fetchWikiList({ page, countPerPage: 5 }), fetchWikiTotalCount()]);
 
     return (
-        <main className="max-w-4xl mx-auto py-10 px-5">
+        <main className="flex flex-col justify-center h-screen max-w-4xl mx-auto py-10 px-5">
             <ServerListComponent
+                contentContainerClassName="min-h-[300px] h-[300px]"
                 data={wikiList.items}
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => (
-                    <Link href={`/wiki/${item.id}`} key={item.id} className="block hover:bg-gray-100 p-3 rounded-lg ">
+                    <Link href={`/wiki/${item.id}`} key={item.id} className="block hover:bg-gray-100 p-3 rounded-lg">
                         <p className="text-lg font-semibold line-clamp-1 text-ellipsis break-words">{item.title}</p>
                     </Link>
                 )}

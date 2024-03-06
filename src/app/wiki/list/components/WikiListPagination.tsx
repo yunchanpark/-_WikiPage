@@ -24,14 +24,14 @@ export default function WikiListPagination({
             renderPrev={({ page, disable }) =>
                 disable ? (
                     <span
-                        className={`mr-2 px-3 py-1 rounded-full text-sm font-medium ${disable ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-700 hover:bg-blue-400 hover:text-white transition-colors duration-150 ease-in-out'}`}
+                        className={`mr-2 px-2 py-1 rounded-full text-sm font-medium ${disable ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-700 hover:bg-blue-400 hover:text-white transition-colors duration-150 ease-in-out'}`}
                     >
                         이전
                     </span>
                 ) : (
                     <Link
                         href={`/wiki/list?page=${page}`}
-                        className={`mr-2 px-3 py-1 rounded-full text-sm font-medium ${disable ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-700 hover:bg-blue-400 hover:text-white transition-colors duration-150 ease-in-out'}`}
+                        className={`mr-2 px-2 py-1 rounded-full text-sm font-medium ${disable ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-700 hover:bg-blue-400 hover:text-white transition-colors duration-150 ease-in-out'}`}
                     >
                         이전
                     </Link>
@@ -40,7 +40,7 @@ export default function WikiListPagination({
             renderNext={({ page, disable }) =>
                 disable ? (
                     <span
-                        className={`mr-2 px-3 py-1 rounded-full text-sm font-medium ${disable ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-700 hover:bg-blue-400 hover:text-white transition-colors duration-150 ease-in-out'}`}
+                        className={`mr-2 px-2 py-1 rounded-full text-sm font-medium ${disable ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-700 hover:bg-blue-400 hover:text-white transition-colors duration-150 ease-in-out'}`}
                     >
                         다음
                     </span>
@@ -48,7 +48,7 @@ export default function WikiListPagination({
                     <Link
                         href={`/wiki/list?page=${page}`}
                         passHref
-                        className={`ml-2 px-3 py-1 rounded-full text-sm font-medium ${disable ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-700 hover:bg-blue-400 hover:text-white transition-colors duration-150 ease-in-out'}`}
+                        className={`ml-2 px-2 py-1 rounded-full text-sm font-medium ${disable ? 'bg-gray-200 text-gray-400 cursor-not-allowed' : 'bg-gray-200 text-gray-700 hover:bg-blue-400 hover:text-white transition-colors duration-150 ease-in-out'}`}
                     >
                         다음
                     </Link>
