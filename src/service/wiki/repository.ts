@@ -32,6 +32,15 @@ export async function fetchWikiDetailList({ id }: FetchWikiDetailRequest): Promi
     return response.json();
 }
 
+// 위키 제목 조회
+export async function fetchTitleList(): Promise<FetchTitleListResponse> {
+    const response = await fetcher('/api/wiki/title', {
+        method: 'GET',
+    });
+
+    return response.json();
+}
+
 /**
  * POST
  */

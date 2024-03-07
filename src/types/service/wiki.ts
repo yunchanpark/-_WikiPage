@@ -34,6 +34,11 @@ type FetchWikiDetailResponse = {
     wiki: Wiki;
 };
 
+// 위키 게시글 상세 조회
+type FetchTitleListResponse = {
+    titleList: Pick<Wiki, 'id' | 'title'>[];
+};
+
 /**
  * POST
  */

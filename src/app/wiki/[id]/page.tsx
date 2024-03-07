@@ -1,4 +1,5 @@
-import { fetchWikiDetailList } from '@/service/wiki/repository';
+import { fetchTitleList, fetchWikiDetailList } from '@/service/wiki/repository';
+import AutoLinkContents from './components/AutoLinkContents';
 import OpenUpdateModalButton from './components/OpenUpdateModalButton';
 
 type WikiDetailPageProps = {
@@ -8,7 +9,7 @@ type WikiDetailPageProps = {
 };
 
 export default async function WikiDetailPage({ params: { id } }: WikiDetailPageProps) {
-    const { wiki } = await fetchWikiDetailList({ id });
+    const [{ wiki }, { titleList }] = await Promise.all([fetchWikiDetailList({ id }), fetchTitleList()]);
 
     return (
         <main className="p-4 max-w-4xl mx-auto">
@@ -20,7 +21,7 @@ export default async function WikiDetailPage({ params: { id } }: WikiDetailPageP
                     <h3 className="text-lg leading-6 font-medium text-gray-900 break-words">{wiki.title}</h3>
                 </div>
                 <div className="border-t border-gray-200">
-                    <p className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2 p-4">{wiki.contents}</p>
+                    <AutoLinkContents titleList={titleList} contents={wiki.contents} />
                 </div>
             </div>
         </main>
