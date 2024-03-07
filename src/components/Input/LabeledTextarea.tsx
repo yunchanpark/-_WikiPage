@@ -8,7 +8,7 @@ export default function LabeledTextarea({ label, ...rest }: LabeledTextareaProps
     return (
         <div>
             <label htmlFor="contents" className="block text-sm font-medium text-gray-700">
-                본문
+                {label}
             </label>
             <textarea
                 {...rest}
