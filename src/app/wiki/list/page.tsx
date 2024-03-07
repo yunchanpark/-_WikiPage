@@ -1,6 +1,7 @@
 import ServerListComponent from '@/components/ServerListComponent';
 import { fetchWikiList, fetchWikiTotalCount } from '@/service/wiki/repository';
 import Link from 'next/link';
+import OpenModalButton from './components/OpenCreateModalButton';
 import WikiListPagination from './components/WikiListPagination';
 
 type WikiListPageProps = {
@@ -27,12 +28,7 @@ export default async function WikiListPage({ searchParams }: WikiListPageProps) 
                 ListHeaderComponent={() => (
                     <div className="flex justify-between items-center mb-5">
                         <p className="text-xl font-bold">위키 조회 페이지</p>
-                        <Link
-                            href={'/wiki/create'}
-                            className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors duration-200"
-                        >
-                            위키 생성
-                        </Link>
+                        <OpenModalButton />
                     </div>
                 )}
                 ListEmptyComponent={() => <p className="text-center py-5">작성된 위키 게시글이 없습니다.</p>}

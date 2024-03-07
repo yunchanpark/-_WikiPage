@@ -22,7 +22,7 @@ export default function ServerListComponent<T>({
     ListFooterComponent,
     renderItem,
     keyExtractor,
-}: ServerListComponentProps<T>): JSX.Element {
+}: ServerListComponentProps<T>) {
     return (
         <div className={wrapperClassName}>
             {ListHeaderComponent && <ListHeaderComponent />}

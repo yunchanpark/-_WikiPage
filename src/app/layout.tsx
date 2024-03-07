@@ -1,3 +1,4 @@
+import { OverlayProvider } from '@/packages/overlay';
 import ReactQueryProvider from '@/providers/ReactQueryProvider';
 import type { Metadata } from 'next';
 import './globals.css';
@@ -16,7 +17,9 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>
-                <ReactQueryProvider>{children}</ReactQueryProvider>
+                <ReactQueryProvider>
+                    <OverlayProvider>{children}</OverlayProvider>
+                </ReactQueryProvider>
             </body>
         </html>
     );

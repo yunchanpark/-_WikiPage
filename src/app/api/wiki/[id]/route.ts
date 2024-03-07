@@ -1,4 +1,5 @@
 import prisma from '@/db';
+import { revalidatePath } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function PUT(req: NextRequest) {
@@ -13,6 +14,7 @@ export async function PUT(req: NextRequest) {
 
         await prisma.wiki.update({ data: { contents: body.contents }, where: { id } });
 
+        revalidatePath('/wiki/[id]', 'page');
         return NextResponse.json({ msa: 'Updated Wiki' }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ msg: 'Failed Update Wiki' }, { status: 500 });

@@ -1,12 +1,17 @@
 import useBaseCreateWiki from '@/service/wiki/mutations/useBaseCreateWiki';
 import { useRouter } from 'next/navigation';
 
-export default function useCreateWiki() {
+type UseCreateWikiProps = {
+    onSuccess(): void;
+};
+
+export default function useCreateWiki({ onSuccess }: UseCreateWikiProps) {
     const router = useRouter();
 
     return useBaseCreateWiki({
         onSuccess: () => {
-            router.replace('/wiki/list?page=1');
+            router.refresh();
+            onSuccess();
         },
     });
 }

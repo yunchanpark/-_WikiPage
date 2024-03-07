@@ -10,7 +10,12 @@ type Context = {
     prevWikiDetail: FetchWikiDetailResponse | undefined;
 };
 
-export default function useUpdateWiki({ id }: { id: string }) {
+type UseUpdateWikiProps = {
+    id: string;
+    onSuccess(): void;
+};
+
+export default function useUpdateWiki({ id, onSuccess }: UseUpdateWikiProps) {
     const queryKey = useMemo(() => WIKI_QUERY_KEY.wikiDetail(id), [id]);
     const router = useRouter();
     const queryClient = useQueryClient();
@@ -35,7 +40,8 @@ export default function useUpdateWiki({ id }: { id: string }) {
             return { prevWikiDetail };
         },
         onSuccess: () => {
-            router.replace(`/wiki/${id}`);
+            router.refresh();
+            onSuccess();
         },
         onError: (_error, _variables, context) => {
             if (context?.prevWikiDetail) {

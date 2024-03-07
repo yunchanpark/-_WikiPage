@@ -1,5 +1,3 @@
-/** @format */
-
 import HTTPError from '../error/HttpError';
 import { FetcherRequestInit } from './types';
 

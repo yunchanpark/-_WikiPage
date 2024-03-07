@@ -1,5 +1,3 @@
-/** @format */
-
 export default class HTTPError extends Error {
     statusCode: number;
 
