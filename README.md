@@ -1,36 +1,114 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 개요
 
-## Getting Started
+Next.js로 만든 위키 페이지입니다.
 
-First, run the development server:
+[배포 사이트](https://wiki-zqyimakx5q-du.a.run.app)
+
+## 설치 및 개발모드 시작
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install && pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+브라우저 주소창에 [http://localhost:3000](http://localhost:3000)를 입력하시면 보실 수 있습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 구성 및 선정 이유
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+-   `Next.js`: 간편한 페이지 라우팅과 빠른 초기 렌더링을 위한 편한 SSR 지원으로 선택했습니다.
+-   `prisma`: 데이터베이스 작업을 간소화하기 위해 도입되었으며, MongoDB와의 호환을 통해 게시판 기능을 위한 영구 저장소를 사용합니다.
+-   `react-query`: 서버 데이터를 캐싱 및 관리하기 위해 사용했습니다.
+-   `dompurify`: XSS 공격 방지를 위해 채택되었습니다. 이는 안전하게 HTML을 주입하고 자동 링크 생성을 가능하게 합니다.
+-   `ESLint`, `Prettier`: 통일된 코딩 스타일과 코드 품질을 유지하기 위해 사용했습니다.
+-   `husky`, `lint-staged`: commit전에 ESLint, Prettier 검사 및 수정하기 위해 사용했습니다.
+-   `.nvmrc`: 프로젝트의 Node.js 버전을 명시하여 개발 환경의 일관성을 보장합니다.
 
-## Learn More
+## 배포 파이프라인
 
-To learn more about Next.js, take a look at the following resources:
+GCP Cloud Run에 배포되어 있습니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 파일 구조
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+src
+ ┣ app
+ ┃ ┣ api
+ ┃ ┃ ┗ wiki
+ ┃ ┃ ┃ ┣ [id]
+ ┃ ┃ ┃ ┃ ┗ route.ts
+ ┃ ┃ ┃ ┣ list
+ ┃ ┃ ┃ ┃ ┗ route.ts
+ ┃ ┃ ┃ ┣ title
+ ┃ ┃ ┃ ┃ ┗ route.ts
+ ┃ ┃ ┃ ┣ total-count
+ ┃ ┃ ┃ ┃ ┗ route.ts
+ ┃ ┃ ┃ ┗ route.ts
+ ┃ ┣ wiki
+ ┃ ┃ ┣ [id]
+ ┃ ┃ ┃ ┣ components
+ ┃ ┃ ┃ ┃ ┣ AutoLinkContents.tsx
+ ┃ ┃ ┃ ┃ ┗ OpenUpdateModalButton.tsx
+ ┃ ┃ ┃ ┣ hooks
+ ┃ ┃ ┃ ┃ ┗ useUpdateWiki.ts
+ ┃ ┃ ┃ ┣ overlay
+ ┃ ┃ ┃ ┃ ┣ UpdateWikiModal.tsx
+ ┃ ┃ ┃ ┃ ┗ useOverlayCreateWiki.tsx
+ ┃ ┃ ┃ ┗ page.tsx
+ ┃ ┃ ┗ list
+ ┃ ┃ ┃ ┣ components
+ ┃ ┃ ┃ ┃ ┣ OpenCreateModalButton.tsx
+ ┃ ┃ ┃ ┃ ┗ WikiListPagination.tsx
+ ┃ ┃ ┃ ┣ hooks
+ ┃ ┃ ┃ ┃ ┗ useCreateWiki.ts
+ ┃ ┃ ┃ ┣ overlay
+ ┃ ┃ ┃ ┃ ┣ CreateWikiModal.tsx
+ ┃ ┃ ┃ ┃ ┗ useOverlayCreateWiki.tsx
+ ┃ ┃ ┃ ┣ loading.tsx
+ ┃ ┃ ┃ ┗ page.tsx
+ ┃ ┣ favicon.ico
+ ┃ ┣ globals.css
+ ┃ ┣ layout.tsx
+ ┃ ┗ page.tsx
+ ┣ components
+ ┃ ┣ Input
+ ┃ ┃ ┣ LabeledTextInput.tsx
+ ┃ ┃ ┗ LabeledTextarea.tsx
+ ┃ ┣ Button.tsx
+ ┃ ┣ Pagination.tsx
+ ┃ ┗ ServerListComponent.tsx
+ ┣ hooks
+ ┃ ┗ useForm.ts
+ ┣ packages
+ ┃ ┗ overlay
+ ┃ ┃ ┣ OverlayContext.tsx
+ ┃ ┃ ┣ OverlayController.tsx
+ ┃ ┃ ┣ OverlayProvider.tsx
+ ┃ ┃ ┣ index.ts
+ ┃ ┃ ┣ types.ts
+ ┃ ┃ ┗ useOverlay.tsx
+ ┣ providers
+ ┃ ┗ ReactQueryProvider.tsx
+ ┣ service
+ ┃ ┗ wiki
+ ┃ ┃ ┣ mutations
+ ┃ ┃ ┃ ┣ useBaseCreateWiki.ts
+ ┃ ┃ ┃ ┗ useBaseUpdateWiki.ts
+ ┃ ┃ ┣ query-key.ts
+ ┃ ┃ ┗ repository.ts
+ ┣ types
+ ┃ ┗ service
+ ┃ ┃ ┗ wiki.ts
+ ┣ utils
+ ┃ ┣ array
+ ┃ ┃ ┣ index.ts
+ ┃ ┃ ┗ range.ts
+ ┃ ┣ error
+ ┃ ┃ ┗ HttpError.ts
+ ┃ ┣ fetcher
+ ┃ ┃ ┣ index.ts
+ ┃ ┃ ┣ query-string-converter.ts
+ ┃ ┃ ┣ request-fetcher.ts
+ ┃ ┃ ┗ types.ts
+ ┃ ┗ parse
+ ┃ ┃ ┗ parse-pagination-params.ts
+ ┗ db.ts
+```
