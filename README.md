@@ -17,14 +17,14 @@ pnpm install && pnpm dev
 -   `Next.js`: 간편한 페이지 라우팅과 빠른 초기 렌더링을 위한 편한 SSR 지원으로 선택했습니다.
 -   `prisma`: 데이터베이스 작업을 간소화하기 위해 도입되었으며, MongoDB와의 호환을 통해 게시판 기능을 위한 영구 저장소를 사용합니다.
 -   `react-query`: 서버 데이터를 캐싱 및 관리하기 위해 사용했습니다.
--   `dompurify`: XSS 공격 방지를 위해 채택되었습니다. 이는 안전하게 HTML을 주입하고 자동 링크 생성을 가능하게 합니다.
+-   `dompurify`: XSS 공격 방지를 위해 사용했습니다. 이는 안전하게 HTML을 주입하고 자동 링크 생성을 가능하게 합니다.
 -   `ESLint`, `Prettier`: 통일된 코딩 스타일과 코드 품질을 유지하기 위해 사용했습니다.
 -   `husky`, `lint-staged`: commit전에 ESLint, Prettier 검사 및 수정하기 위해 사용했습니다.
 -   `.nvmrc`: 프로젝트의 Node.js 버전을 명시하여 개발 환경의 일관성을 보장합니다.
 
 ## 배포 파이프라인
 
-GCP Cloud Run에 배포되어 있습니다.
+![배포파이프라인](https://github.com/yunchanpark/ParkYunChan_WikiPage/assets/96051437/2b43bd7f-37a2-40eb-945f-0ff113a3b86c)
 
 ## 파일 구조
 
