@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
+        "mongo:init": "docker-compose up -d mongodb",
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
@@ -11,11 +12,19 @@
         "lint-front": "lint-staged"
     },
     "dependencies": {
+        "@prisma/client": "^5.10.2",
+        "@tanstack/react-query": "^5.24.8",
+        "@tanstack/react-query-devtools": "^5.24.8",
+        "@tanstack/react-query-next-experimental": "^5.24.8",
+        "dompurify": "^3.0.9",
+        "jsdom": "^24.0.0",
         "next": "14.1.2",
         "react": "^18",
         "react-dom": "^18"
     },
     "devDependencies": {
+        "@types/dompurify": "^3.0.5",
+        "@types/jsdom": "^21.1.6",
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
@@ -26,6 +35,7 @@
         "lint-staged": "^15.2.2",
         "postcss": "^8",
         "prettier": "^3.2.5",
+        "prisma": "^5.10.2",
         "tailwindcss": "^3.3.0",
         "typescript": "^5"
     }

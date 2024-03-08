@@ -10,5 +10,10 @@
         {
             "mode": "auto"
         }
+    ],
+    "tailwindCSS.experimental.classRegex": [
+        "className=\"([^\"]*)\"",
+        "wrapperClassName=\"([^\"]*)\"",
+        "contentContainerClassName=\"([^\"]*)\""
     ]
 }
