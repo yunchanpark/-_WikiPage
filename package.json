@@ -3,7 +3,9 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "mongo:init": "docker-compose up -d mongodb",
+        "mongo:remove": "sh ./scripts/mongo-remove.sh",
+        "mongo:create": "sh ./scripts/mongo-create.sh",
+        "mongo:init": "pnpm mongo:remove && pnpm mongo:create",
         "dev": "next dev",
         "build": "prisma generate && next build",
         "start": "next start",
@@ -18,7 +20,6 @@
         "@tanstack/react-query-devtools": "^5.24.8",
         "@tanstack/react-query-next-experimental": "^5.24.8",
         "dompurify": "^3.0.9",
-        "jsdom": "^24.0.0",
         "next": "14.1.2",
         "react": "^18",
         "react-dom": "^18"
