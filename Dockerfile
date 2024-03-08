@@ -3,10 +3,8 @@ FROM node:18-alpine AS base
 FROM base AS installer
 
 ARG DATABASE_URL
-ARG API_SERVER_URL
 
 ENV DATABASE_URL ${DATABASE_URL}
-ENV API_SERVER_URL ${API_SERVER_URL}
 
 RUN apk add --no-cache libc6-compat
 RUN apk update
@@ -23,9 +21,7 @@ WORKDIR /app
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
-RUN mkdir .next
-RUN chown nextjs:nodejs .next
-
+COPY --from=installer /app/public ./public
 COPY --from=installer --chown=nextjs:nodejs /app/node_modules ./node_modules
 COPY --from=installer --chown=nextjs:nodejs /app/.next/standalone ./wiki
 COPY --from=installer --chown=nextjs:nodejs /app/.next/static ./wiki/.next/static
