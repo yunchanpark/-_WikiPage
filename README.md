@@ -20,6 +20,12 @@ local에서 replica set 설정이 되어있는 mongoDB가 필요합니다.
 pnpm mongo:create
 ```
 
+DataBase를 생성합니다.
+```bash
+npx prisma db push
+```
+
+dev로 실행합니다.
 ```bash
 pnpm install && pnpm dev
 ```
