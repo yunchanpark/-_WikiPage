@@ -16,6 +16,11 @@ else
     echo "Mongo image already exists."
 fi
 
+mkdir dockers/mongo/data
+mkdir dockers/mongo/data/mongo1
+mkdir dockers/mongo/data/mongo2
+mkdir dockers/mongo/data/mongo3
+
 # docker compose
 docker-compose up -d
 
