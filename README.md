@@ -4,7 +4,21 @@ Next.js로 만든 위키 페이지입니다.
 
 [배포 사이트](https://wiki-zqyimakx5q-du.a.run.app)
 
+## 로컬 실행환경
+|이름|내용|
+|---|---|
+|OS|macOS|
+|칩|Apple M1 Pro|
+|Node|18.18.2|
+|Docker|20.10.23|
+|pnpm|8.6.12|
+
+
 ## 설치 및 개발모드 시작
+local에서 replica set 설정이 되어있는 mongoDB가 필요합니다.
+```bash
+pnpm mongo:create
+```
 
 ```bash
 pnpm install && pnpm dev
