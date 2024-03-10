@@ -41,7 +41,7 @@ function fetcher() {
             throw new HTTPError(data.msg, response.status);
         }
 
-        return response;
+        return response.json();
     };
 }
 
